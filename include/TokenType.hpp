@@ -52,7 +52,7 @@ enum class TokenType
     VAR,
     WHILE,
     #ifndef EOF
-    EOF -1
+    EOF=-1
     #endif // !EOF
 
 };
