@@ -51,9 +51,7 @@ enum class TokenType
     TRUE,
     VAR,
     WHILE,
-    #ifndef EOF
-    EOF=-1
-    #endif // !EOF
+    FILEEND = -1
 
 };
 
