@@ -21,12 +21,17 @@ private:
         return m_current >= m_source.length();
     }
 
-    //void scan_token();
-    //char advance();
+    void scan_token();
+    char advance();
+    char peek();
+    bool match(char expected);
 
 public:
     explicit Scanner(const std::string& source);
     const std::vector<Token>& scan_tokens();
+
+    void add_token(TokenType type);
+    void add_token(TokenType type, std::unique_ptr<Object> obj);
 }; 
 
 #endif // !__SCANNER__
