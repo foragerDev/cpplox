@@ -14,6 +14,7 @@ private:
     std::size_t m_line;
 
 public:
+    Token() = default;
     Token(
         TokenType type,
         const std::string& lexeme,

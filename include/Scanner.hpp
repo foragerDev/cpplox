@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "Token.hpp"
 
 class Scanner {
@@ -13,7 +14,24 @@ private:
     size_t m_start = 0;
     size_t m_current = 0;
     size_t m_line = 1;
-
+    static inline std::unordered_map<std::string, TokenType> m_keywords {
+        {"and", TokenType::AND},
+        {"class", TokenType::CLASS},
+        {"else", TokenType::ELSE},
+        {"false", TokenType::FALSE},
+        {"for", TokenType::FOR},
+        {"fun", TokenType::FUN},
+        {"if", TokenType::IF},
+        {"nil", TokenType::NIL},
+        {"or", TokenType::OR},
+        {"print", TokenType::PRINT},
+        {"return", TokenType::RETURN},
+        {"true", TokenType::TRUE},
+        {"super", TokenType::SUPER},
+        {"this", TokenType::THIS},
+        {"var", TokenType::VAR},
+        {"while", TokenType::WHILE}
+    };
     
 private:
     //Private helper functions
@@ -24,9 +42,14 @@ private:
     void scan_token();
     char advance();
     char peek();
+    char peek_next();
     bool match(char expected);
+    void string_literal();
+    void number_literal();
+    void idenitfier();
 
 public:
+    Scanner() = default;
     explicit Scanner(const std::string& source);
     const std::vector<Token>& scan_tokens();
 

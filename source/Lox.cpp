@@ -1,4 +1,6 @@
 #include "Lox.hpp"
+#include "Scanner.hpp"
+
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -16,6 +18,8 @@ void Lox::run_prompt(){
         std::cout << "> ";
         std::cin >> buffer;
         if(std::cin.eof()) break;
+        Scanner scanner(buffer);
+//        auto result = scanner.scan_tokens();
         run(buffer);
     }
 }

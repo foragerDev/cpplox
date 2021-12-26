@@ -1,5 +1,6 @@
 #include "../include/Scanner.hpp"
 #include "../include/TokenType.hpp"
+#include "Literal.hpp"
 #include <stdio.h>
 
 Scanner::Scanner(const std::string &source) : m_source(source)
@@ -25,6 +26,48 @@ bool Scanner::match(char expected){
 char Scanner::peek(){
     if(is_at_end()) return '\0';
     return m_source.at(m_current);
+}
+
+char Scanner::peek_next(){
+    if(m_current + 1 >= m_source.length()) return '\0';
+    return m_source.at(m_current + 1);
+}
+
+void Scanner::string_literal(){
+    while(peek() != '"' && !is_at_end()) {
+        if (peek() == '\n') m_line++;
+        advance();
+    }
+
+    if (is_at_end()){
+        //report error.
+    }
+
+    advance();
+
+    std::string value(m_start + 1, m_current - 1);
+    add_token(TokenType::STRING, object_factory(value));
+}
+
+void Scanner::number_literal(){
+    while(std::isdigit(peek())) advance();
+    if (peek() == '.' && isdigit(peek_next())){
+        advance();
+        while(isdigit(peek())) advance();
+    }
+
+    std::string numeral_string(m_start, m_current);
+    auto numeral = stod(numeral_string);
+    add_token(TokenType::NUMBER, object_factory(numeral));
+}
+
+void Scanner::idenitfier() {
+    while(isalnum(peek())) advance();
+    std::string text(m_start, m_current);
+    auto type = Scanner::m_keywords.find(text);
+    if(type == Scanner::m_keywords.end()) {
+        add_token(TokenType::IDENITFIER);
+    }
 }
 
 void Scanner::scan_token(){
@@ -66,6 +109,12 @@ void Scanner::scan_token(){
         case '\n':
             m_line++;
             break;
+        default:
+            if (isdigit(c)){
+                number_literal();
+            } else if (isalpha(c)){
+
+            }
 //            break;
 //            //handle errors here,lets figure it out to report our compiler some how.
 

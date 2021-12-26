@@ -1,3 +1,6 @@
+#ifndef LITERAL_
+#define LITERAL_
+
 #include <memory>
 #include <string>
 
@@ -28,7 +31,7 @@ private:
 class Integer : public Object {
 public:
   Integer() = default;
-  explicit Integer(int value) : data(value) {}
+  explicit Integer(const double &value) : data(value) {}
 
   virtual int get_type_id() override { return type_id; }
   virtual std::string to_string() override { return std::to_string(data); }
@@ -39,10 +42,12 @@ private:
   int data;
 };
 
-std::unique_ptr<Object> object_factory(std::string &&data) {
-  return std::make_unique<String>(std::forward<std::string>(data));
+std::unique_ptr<Object> object_factory(const std::string &data) {
+  return std::make_unique<String>(data);
 }
 
-std::unique_ptr<Object> object_factory(int data) {
-  return std::make_unique<Integer>(std::forward<int>(data));
+std::unique_ptr<Object> object_factory(const double &data) {
+  return std::make_unique<Integer>(data);
 }
+
+#endif // !LITERAL_

@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 include_directories(include)
 set(SOURCES
     source/Lox.cpp
+    source/Scanner.cpp
 )
 add_executable(Cpplox main.cpp ${SOURCES})
 target_include_directories(Cpplox PUBLIC include)
