@@ -9,7 +9,7 @@ class Token {
 private:
     TokenType m_type;
     std::string m_lexeme;
-    std::unique_ptr<Object> m_literal;
+    std::unique_ptr<Object> m_literal = nullptr;
     std::size_t m_col;
     std::size_t m_line;
 

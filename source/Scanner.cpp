@@ -45,7 +45,7 @@ void Scanner::string_literal(){
 
     advance();
 
-    std::string value(m_start + 1, m_current - 1);
+    std::string value(m_source.begin() + m_start + 1, m_source.begin() + m_current - 1);
     add_token(TokenType::STRING, object_factory(value));
 }
 
@@ -56,7 +56,7 @@ void Scanner::number_literal(){
         while(isdigit(peek())) advance();
     }
 
-    std::string numeral_string(m_start, m_current);
+    std::string numeral_string(m_source.begin() + m_start, m_source.end() + m_current);
     auto numeral = stod(numeral_string);
     add_token(TokenType::NUMBER, object_factory(numeral));
 }
@@ -113,7 +113,7 @@ void Scanner::scan_token(){
             if (isdigit(c)){
                 number_literal();
             } else if (isalpha(c)){
-
+                idenitfier();
             }
 //            break;
 //            //handle errors here,lets figure it out to report our compiler some how.
@@ -136,5 +136,5 @@ void Scanner::add_token(TokenType type){
 
 void Scanner::add_token(TokenType type, std::unique_ptr<Object> literal){
     std::string text(m_source.begin() + m_start, m_source.begin() + m_current);
-    m_tokens.emplace_back(type, text, literal, m_current, m_line);
+    m_tokens.emplace_back(type, text, std::move(literal), m_current, m_line);
 }

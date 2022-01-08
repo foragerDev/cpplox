@@ -16,10 +16,10 @@ void Lox::run_prompt(){
     std::string buffer;
     for(;;){
         std::cout << "> ";
-        std::cin >> buffer;
+        std::getline(std::cin, buffer);
         if(std::cin.eof()) break;
         Scanner scanner(buffer);
-//        auto result = scanner.scan_tokens();
+        const auto& result = scanner.scan_tokens();
         run(buffer);
     }
 }

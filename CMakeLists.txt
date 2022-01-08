@@ -7,6 +7,7 @@ include_directories(include)
 set(SOURCES
     source/Lox.cpp
     source/Scanner.cpp
+    source/Token.cpp
 )
 add_executable(Cpplox main.cpp ${SOURCES})
 target_include_directories(Cpplox PUBLIC include)

@@ -22,6 +22,7 @@ public:
   virtual int get_type_id() override { return type_id; }
   virtual std::string to_string() override { return data; }
   virtual ~String() = default;
+  size_t length() const { return data.length(); }
   // Implement its API later
 private:
   static constexpr int type_id = 1;
@@ -42,11 +43,11 @@ private:
   int data;
 };
 
-std::unique_ptr<Object> object_factory(const std::string &data) {
+inline std::unique_ptr<Object> object_factory(const std::string &data) {
   return std::make_unique<String>(data);
 }
 
-std::unique_ptr<Object> object_factory(const double &data) {
+inline std::unique_ptr<Object> object_factory(const double &data) {
   return std::make_unique<Integer>(data);
 }
 
