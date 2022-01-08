@@ -63,11 +63,13 @@ void Scanner::number_literal(){
 
 void Scanner::idenitfier() {
     while(isalnum(peek())) advance();
-    std::string text(m_start, m_current);
+    std::string text(m_source.begin() + m_start, m_source.begin() + m_current);
     auto type = Scanner::m_keywords.find(text);
     if(type == Scanner::m_keywords.end()) {
         add_token(TokenType::IDENITFIER);
+        return;
     }
+    add_token(type->second);
 }
 
 void Scanner::scan_token(){
@@ -83,6 +85,7 @@ void Scanner::scan_token(){
         case '+': add_token(TokenType::PLUS); break;
         case ';': add_token(TokenType::SEMICOLEN); break;
         case '*': add_token(TokenType::STAR); break;
+        case '"': string_literal(); break;
         case '!':
             add_token(match('=') ? TokenType::BANG_EQUAL : TokenType::EQUAL);
             break;
