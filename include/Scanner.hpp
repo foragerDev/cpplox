@@ -47,6 +47,7 @@ private:
     void string_literal();
     void number_literal();
     void idenitfier();
+    void process_multiline_comment();
 
 public:
     Scanner() = default;
