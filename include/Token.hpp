@@ -5,7 +5,8 @@
 #include "Literal.hpp"
 #include <string>
 
-class Token {
+class Token
+{
 private:
     TokenType m_type;
     std::string m_lexeme;
@@ -17,7 +18,7 @@ public:
     Token() = default;
     Token(
         TokenType type,
-        const std::string& lexeme,
+        const std::string &lexeme,
         std::unique_ptr<Object> object,
         std::size_t col,
         std::size_t line);

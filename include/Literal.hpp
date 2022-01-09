@@ -4,7 +4,8 @@
 #include <memory>
 #include <string>
 
-class Object {
+class Object
+{
 public:
   virtual int get_type_id() = 0;
   virtual std::string to_string() = 0;
@@ -14,7 +15,8 @@ private:
   static constexpr int id = 0;
 };
 
-class String : public Object {
+class String : public Object
+{
 public:
   String() = default;
   explicit String(const std::string &str) : data(str) {}
@@ -29,7 +31,8 @@ private:
   std::string data{};
 };
 
-class Integer : public Object {
+class Integer : public Object
+{
 public:
   Integer() = default;
   explicit Integer(const double &value) : data(value) {}
@@ -43,11 +46,13 @@ private:
   int data;
 };
 
-inline std::unique_ptr<Object> object_factory(const std::string &data) {
+inline std::unique_ptr<Object> object_factory(const std::string &data)
+{
   return std::make_unique<String>(data);
 }
 
-inline std::unique_ptr<Object> object_factory(const double &data) {
+inline std::unique_ptr<Object> object_factory(const double &data)
+{
   return std::make_unique<Integer>(data);
 }
 

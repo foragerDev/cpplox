@@ -4,7 +4,7 @@
 enum class TokenType
 {
     // Single Character Token
-    
+
     LEFT_PERN,
     RIGHT_PERN,
     LEFT_BRACE,
@@ -17,7 +17,7 @@ enum class TokenType
     SLASH,
     STAR,
 
-    //One Or TWO Charater tokens
+    // One Or TWO Charater tokens
 
     BANG,
     BANG_EQUAL,
@@ -28,13 +28,13 @@ enum class TokenType
     LESS,
     LESS_EQUAL,
 
-    //Literals
+    // Literals
 
     IDENITFIER,
     STRING,
     NUMBER,
 
-    //Keyword
+    // Keyword
     AND,
     CLASS,
     ELSE,

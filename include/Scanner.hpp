@@ -6,15 +6,16 @@
 #include <unordered_map>
 #include "Token.hpp"
 
-class Scanner {
+class Scanner
+{
 private:
-    //Data Memebers
+    // Data Memebers
     std::string m_source;
     std::vector<Token> m_tokens;
     size_t m_start = 0;
     size_t m_current = 0;
     size_t m_line = 1;
-    static inline std::unordered_map<std::string, TokenType> m_keywords {
+    static inline std::unordered_map<std::string, TokenType> m_keywords{
         {"and", TokenType::AND},
         {"class", TokenType::CLASS},
         {"else", TokenType::ELSE},
@@ -30,12 +31,12 @@ private:
         {"super", TokenType::SUPER},
         {"this", TokenType::THIS},
         {"var", TokenType::VAR},
-        {"while", TokenType::WHILE}
-    };
-    
+        {"while", TokenType::WHILE}};
+
 private:
-    //Private helper functions
-    bool is_at_end(){
+    // Private helper functions
+    bool is_at_end()
+    {
         return m_current >= m_source.length();
     }
 
@@ -51,11 +52,11 @@ private:
 
 public:
     Scanner() = default;
-    explicit Scanner(const std::string& source);
-    const std::vector<Token>& scan_tokens();
+    explicit Scanner(const std::string &source);
+    const std::vector<Token> &scan_tokens();
 
     void add_token(TokenType type);
     void add_token(TokenType type, std::unique_ptr<Object> obj);
-}; 
+};
 
 #endif // !__SCANNER__

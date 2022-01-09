@@ -10,8 +10,8 @@ public:
 
 private:
     void run(const std::string &source);
-    std::string read_source_file(const std::string& filename);
-    
+    std::string read_source_file(const std::string &filename);
+
     bool m_had_error{false};
 };
 
